@@ -1,0 +1,214 @@
+:root {
+    --vs-colors--lightest: rgba(60, 60, 60, 0.26);
+    --vs-colors--light: rgba(60, 60, 60, 0.5);
+    --vs-colors--dark: #333;
+    --vs-colors--darkest: rgba(0, 0, 0, 0.15);
+
+    /* Search Input */
+    --vs-search-input-color: inherit;
+    --vs-search-input-bg: rgb(255, 255, 255);
+    --vs-search-input-placeholder-color: inherit;
+
+    /* Font */
+    --vs-font-size: 12px;
+    --vs-line-height: 1.4;
+
+    /* Disabled State */
+    --vs-state-disabled-bg: rgb(248, 248, 248);
+    --vs-state-disabled-color: var(--vs-colors--light);
+    --vs-state-disabled-controls-color: var(--vs-colors--light);
+    --vs-state-disabled-cursor: not-allowed;
+
+    /* Borders */
+    --vs-border-color: var(--vs-colors--lightest);
+    --vs-border-width: 1px;
+    --vs-border-style: solid;
+    --vs-border-radius: 4px;
+
+    /* Actions: house the component controls */
+    --vs-actions-padding: 4px 6px 0 3px;
+
+    /* Component Controls: Clear, Open Indicator */
+    --vs-controls-color: var(--vs-colors--light);
+    --vs-controls-size: 1;
+    --vs-controls--deselect-text-shadow: 0 1px 0 #fff;
+
+    /* Selected */
+    --vs-selected-bg: #f0f0f0;
+    --vs-selected-color: var(--vs-colors--dark);
+    --vs-selected-border-color: var(--vs-border-color);
+    --vs-selected-border-style: var(--vs-border-style);
+    --vs-selected-border-width: var(--vs-border-width);
+
+    /* Dropdown */
+    --vs-dropdown-bg: #fff;
+    --vs-dropdown-color: inherit;
+    --vs-dropdown-z-index: 1000;
+    --vs-dropdown-min-width: 160px;
+    --vs-dropdown-max-height: 350px;
+    --vs-dropdown-box-shadow: 0px 3px 6px 0px var(--vs-colors--darkest);
+
+    /* Options */
+    --vs-dropdown-option-bg: #000;
+    --vs-dropdown-option-color: var(--vs-dropdown-color);
+    --vs-dropdown-option-padding: 3px 20px;
+
+    /* Active State */
+    --vs-dropdown-option--active-bg: #5897fb;
+    --vs-dropdown-option--active-color: #fff;
+
+    /* Deselect State */
+    --vs-dropdown-option--deselect-bg: #fb5858;
+    --vs-dropdown-option--deselect-color: #fff;
+
+    /* Transitions */
+    --vs-transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+    --vs-transition-duration: 150ms;
+}
+
+.navbar {
+    min-height: 40px;
+    height: 40px;
+}
+.navbar-top-links li:last-child {
+  /* margin-right: 40px; */
+  margin-right: 10px;
+}
+.navbar-top-links li a {
+  /* padding: 20px 10px;
+  min-height: 50px; */
+  padding: 0;
+  min-height: 40px;
+}
+.nav-header {
+  /* padding: 33px 25px; */
+  padding: 0;
+}
+.btn-hbg {
+    background-color: transparent;
+    border-color: transparent;
+    color: #848484;
+}
+.minimalize-styl-2 {
+    padding: 6px 12px;
+    margin: 0 0 0 2px;
+    font-size: 18px;
+    float: left;
+}
+
+@media (min-width: 992px) {
+    .col-md-3 {
+        width: fit-content;
+    }
+}
+
+.topnav-qm {
+    float: left;
+    margin-top: 6px;
+    margin-left: 20px;
+    margin-right: 50px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+}
+/*
+.topnav-qm input {
+    width: 200px;
+    height: 30px;
+    background-color: #848484;
+    color: #ffffff;
+    border-radius: 3px;
+    padding: 0 10px;
+    border: none;
+    position: relative;
+    top: -6px;
+}
+.topnav-qm input::placeholder {
+    color: #ffffff;
+}
+*/
+.topnav-user {
+    width: fit-content;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;;
+    float: right !important;
+    margin-right: 14px;
+    padding-left: 20px;
+    font-size: 12px;
+}
+.topnav-user ul li {
+    display: inline-block;
+}
+.user_name {
+    color: #333333;
+    font-weight: 600;
+}
+.logout_btn {
+    color: #333333 !important;
+    font-weight: 400 !important;
+}
+.logout_btn a {
+    padding: 0;
+}
+
+.topnav-box-wrap {
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+.topnav-box {
+    display: inline-flex;
+    float: left;
+}
+.topnav-box p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topnav-box ul {
+    display: inline-flex;
+}
+.topnav-box ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topnav-box ul li:first-child {
+    padding-right: 5px;
+}
+.topnav-box ul li + li {
+    padding: 0 5px;
+}
+.box1 {
+    width: fit-content;
+    height: 30px;
+    margin-right: 15px;
+}
+.box2 {
+    width: fit-content;
+    height: 30px;
+}
+.topnav-box-head {
+    background-color: #dfdfdf;
+    border: 1px solid #999999;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+.topnav-box-body {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    width: fit-content;
+    height: 30px;
+    text-align: center;
+    padding: 0 10px;
+    border-left: none;
+}
+
