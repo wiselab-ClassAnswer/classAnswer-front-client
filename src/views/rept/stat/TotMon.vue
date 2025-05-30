@@ -210,7 +210,7 @@ export default {
 		return {
             refreshInterval: null,
             params : {
-                isInterval   : 'Y',
+                isInterval   : 'N',
                 selGmdlNo    : '',  // 셀 선택시 선택 된 행의 모델번호
                 selEcousNo   : '', // 셀 선택시 선택 된 행의 교육과정번호 
             },
