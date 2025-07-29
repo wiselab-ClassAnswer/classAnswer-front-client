@@ -26,7 +26,7 @@ export default [
 {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/cmon/Login.vue'),
+    component: () => import('@/views/cmon/CtchLogin.vue'),
     meta: {
         requiresAuth: false
     }

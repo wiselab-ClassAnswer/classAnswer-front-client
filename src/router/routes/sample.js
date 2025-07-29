@@ -53,7 +53,7 @@ export default [
     component: () => import('@/views/sample/params/getParam.vue'),
     props: true,
     meta: {
-         requiresAuth: false
+        requiresAuth: false
     }
 },
 {
@@ -61,7 +61,7 @@ export default [
     name: 'sample/loading',
     component: () => import('@/views/sample/loading.vue'),
     meta: {
-         requiresAuth: false
+        requiresAuth: false
     }
 },
 {
@@ -69,7 +69,32 @@ export default [
     name: 'popup/sample/swalert',
     component: () => import('@/views/sample/swalert.vue'),
     meta: {
-         requiresAuth: false
+        requiresAuth: false
     }
-}
+},
+
+{
+    path: '/barChart',
+    name: 'BarChart',
+    component: () => import('@/views/sample/classanswer/barChartSample.vue'),
+    meta: {
+        requiresAuth: false
+    }
+},
+{
+    path: '/gaugeChart',
+    name: 'GaugeChart',
+    component: () => import('@/views/sample/classanswer/GaugeChartSample.vue'),
+    meta: {
+        requiresAuth: false
+    }
+},
+{
+    path: '/raderChart',
+    name: 'RaderChart',
+    component: () => import('@/views/sample/classanswer/RaderChartSample.vue'),
+    meta: {
+        requiresAuth: false
+    }
+},
 ]
