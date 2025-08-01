@@ -24,13 +24,13 @@ export default [
         requiresAuth: false
     }
 },
-{
-    path: '/popup/totMonPop/:popupYn',
-    name: '종합현황',
-    component: () => import('@/views/rept/stat/TotMon.vue'),
-    props: true,
-    meta: {
-        requiresAuth: false
-    }
-},
+// {
+//     path: '/popup/totMonPop/:popupYn',
+//     name: '종합현황',
+//     component: () => import('@/views/rept/stat/TotMon.vue'),
+//     props: true,
+//     meta: {
+//         requiresAuth: false
+//     }
+// },
 ]
