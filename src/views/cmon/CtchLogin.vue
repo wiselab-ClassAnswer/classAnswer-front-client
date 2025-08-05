@@ -8,7 +8,7 @@
                 <p class="login-copyright p-t-5">CopyRight (c) 2025 WiseLab CO.,LTD.<br>All Rights Reserved.</p>
             </div> -->
 
-            <div class="login-only" v-if="showLogin">
+            <div class="login-only">
                 <div class="login-form">
                     <div class="img-wrapper">
                         <img class="login-logo p-0" src="@/assets/img/login_logo.png" alt="">
@@ -23,7 +23,7 @@
                             <input type="password" class="form-control" v-model="params.userPswd" autocomplete="off" v-on:keyup.enter="login()">
                         </div>
                         <div>
-                            <p class="login-lostpw p-0 p-l-25" @click="changeDiv">비밀번호 변경</p>
+                            <p class="login-lostpw p-0 p-l-25" @click="openPop('pwsd', null)">비밀번호 변경</p>
                         </div>
                     </div>
                     <div class="form-group mg_none">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="login-only"  v-else>
+            <!-- <div class="login-only"  v-else>
                 <div class="login-form">
                     <p class="control-label no-pointer" style="font-size:26px;">비밀번호 변경</p>
                     <div class="form-group">
@@ -70,7 +70,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div> -->
             
 
 
@@ -159,6 +159,11 @@
             </svg>
         </div>
 
+        <!-- 거래처 조회 팝업 -->
+        <PwsdChngMng ref="PwsdChngMngRefModal"></PwsdChngMng>
+        <!-- 견적서 조회 팝업 -->
+        <JoinAprvMng ref="JoinAprvMngRefModal"></JoinAprvMng>
+
     </div>
 </template>
 
@@ -166,21 +171,22 @@
 
 import { CmonUtil } from '@/utils/CmonUtil.js'
 import { ValdUtil } from '@/utils/ValdUtil.js';
+//비밀번호 찾기
+import PwsdChngMng from '@/views/cmon/PswdChngMng.vue'
+//회원가입 신청
+import JoinAprvMng from '@/views/oper/cont/JoinAprvMng.vue'
 
 export default {
+    components: {
+        PwsdChngMng,
+        JoinAprvMng,
+    },
     data: function () {
         return {
             params: {
-                userId            : null,     // 로그인_사용자_아이디
-                pwsdFindUserId    : '',     // 비밀번호_찾기_사용자_아이디
-                userPswd          : '',     // 로그인_사용자_비밀번호
-                currUserPswd      : '',     // 비밀번호 찾기 현재 비밀번호 
-                newUserPswd       : '',     // 비밀번호_찾기_새_비밀번호
-                newUserPswdChck   : '',     // 비밀번호_찾기_새_비밀번호_확인
-                authNum           : '',     // 사용자가 입력하는 인증번호
-                getAuthNum        : ''      // 서버에서 받은 인증번호
+                userId      : '',     
+                userPswd    : ''      
             },
-            showLogin: true, 
         }
     },
     methods: {
@@ -233,6 +239,21 @@ export default {
 
             } else {
                 $this.alert("아이디를 입력해주세요.");
+            }
+        },
+
+        // 팝업
+        openPop(div, inptId){
+            const $this = this;
+            //비밀번호 변경 팝업
+            if( div === "pwsd"){
+                $this.$refs.PwsdChngMngRefModal.show();
+                $this.$refs.PwsdChngMngRefModal.init(div);
+            }
+            // 가입 신청 팝업
+            else if(div === "join"){
+                $this.$refs.JoinAprvMngRefModal.show();
+                $this.$refs.JoinAprvMngRefModal.init(div);
             }
         },
 
@@ -297,7 +318,6 @@ export default {
 
         //뒤로가기 방지
         preventBack: function () {
-            const thisObject = this;
             history.pushState(null, null, location.href);
             window.onbeforeunload = null;
 
@@ -310,14 +330,8 @@ export default {
         resetParam: function(){
             let $this = this;
 
-            $this.params.userId             = null;
-            $this.params.pwsdFindUserId     = '';
-            $this.params.currUserPswd       = '';
+            $this.params.userId             = '';
             $this.params.userPswd           = '';
-            $this.params.newUserPswd        = '';
-            $this.params.newUserPswdChck    = '';
-            $this.params.authNum            = '';
-            $this.params.getAuthNum         = '';
 
         },
 

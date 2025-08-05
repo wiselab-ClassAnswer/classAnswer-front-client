@@ -97,4 +97,12 @@ export default [
         requiresAuth: false
     }
 },
+{
+    path: '/visNetwork',
+    name: 'VisNetwork',
+    component: () => import('@/views/sample/classanswer/VisNetwork.vue'),
+    meta: {
+        requiresAuth: false
+    }
+},
 ]

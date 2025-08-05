@@ -49,10 +49,10 @@ module.exports = defineConfig({
   indexPath: "index.html",
 
   devServer: {
-    port: 9192,
+    port: 3000,
     proxy: {
       '.hb$': {
-        target: 'http://127.0.0.1:9999',
+        target: 'http://127.0.0.1:8080',
         changeOrigin: true,
         ws: true
       }
