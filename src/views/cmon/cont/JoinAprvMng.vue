@@ -7,7 +7,7 @@
                     <div class="content-wrapper">
 
                         <!-- 구성원 정보 파트 -->
-                        <div class="">
+                        <div class=""> 
                             <div class="">
                                 <div class="content-container">
                                     <div class="title vw-1"><span class="essn-b">아이디</span></div>

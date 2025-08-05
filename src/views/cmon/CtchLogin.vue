@@ -27,12 +27,9 @@
                         </div>
 
                         <div>
-                            <p class="login-lostpw p-0 p-l-25" @click="openPop('join', null)">가입 신청</p>
-                        </div>
-
-                        <div>
                             <p class="login-lostpw p-0 p-l-25" @click="openPop('pwsd', null)">비밀번호 변경</p>
                         </div>
+
 
                     </div>
                     <div class="form-group mg_none">
@@ -183,11 +180,7 @@ import { ValdUtil } from '@/utils/ValdUtil.js';
 //비밀번호 찾기
 import PwsdChngMng from '@/views/cmon/PswdChngMng.vue'
 //회원가입 신청
-import JoinAprvMng from '@/views/oper/cont/JoinAprvMng.vue'
-//비밀번호 찾기
-import PwsdChngMng from '@/views/cmon/PswdChngMng.vue'
-//회원가입 신청
-import JoinAprvMng from '@/views/oper/cont/JoinAprvMng.vue'
+import JoinAprvMng from '@/views/cmon/cont/JoinAprvMng.vue'
 
 export default {
     components: {
@@ -197,8 +190,8 @@ export default {
     data: function () {
         return {
             params: {
-                userId      : '',     
-                userPswd    : ''      
+                userId      : '',  //아아디 
+                userPswd    : '',  //패스워드   
             },
         }
     },

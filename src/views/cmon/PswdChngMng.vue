@@ -13,17 +13,19 @@
                                     <div class="title vw-1"><span>아이디</span></div>
 
                                     <div class="content vw-3">
-                                        <input type="text" v-model="authParams.userId">
+                                        <input type="text" v-model="pwsdChngParams.userId">
                                     </div>
                                 </div>
 
                                 <div class="content-container">
                                     <div class="title vw-1"><span>인증번호</span></div>
-                                    <div class="content vw-1"><input type="text" v-model="pwsdChngParams.authNum"></div>
+                                    <div class="content vw-1">
+                                        <input type="text" maxlength="4" v-model="pwsdChngParams.authNo">
+                                    </div>
                                 </div>
                                 <div class="content-container">
                                     <div class="content vw-1">
-                                        <button @click="requestAuthNum()">인증번호 요청</button>
+                                        <button @click="requestAuthNo()">인증번호 요청</button>
                                     </div>
                                 </div>
 
@@ -83,17 +85,15 @@ export default {
     },
     data: function () {
         return {
-            authParams: {
-                userId          : '', //유저 아이디
+            pwsdChngParams : {
+                userId              : '',     //아이디
+                authNo             : '',     //인증번호
+                userPwsd            : '',     //비밀번호
+                pwsdCheck           : ''      //비밀번호 확인
             },
-            pwsdChngParams      : {
-                authNum         : '', //인증번호
-                userPwsd        : '', //비밀번호
-                pwsdCheck       : ''  //비밀번호 확인
-            },
-            isAuthConfirmed     : false,
-            showPswdDiffMsg     : false, //패스워드 불일치 메시지 표시여부
-            showPswdValidPatternMsg : false  //패스워드 패턴 메시지 표시여부
+            isAuthConfirmed         : false,
+            showPswdDiffMsg         : false,  //패스워드 불일치 메시지 표시여부
+            showPswdValidPatternMsg : false   //패스워드 패턴 메시지 표시여부
         }
     },
     methods: {
@@ -106,10 +106,12 @@ export default {
         initData () {
             const $this = this;
 
-            $this.authParams.userId        = '';
-            $this.pwsdChngParams.authNum   = '';
-            $this.pwsdChngParams.userPwsd      = '';
+            $this.pwsdChngParams.userId    = '';
+            $this.pwsdChngParams.authNo   = '';
+            $this.pwsdChngParams.userPwsd  = '';
             $this.pwsdChngParams.pwsdCheck = '';
+
+            $this.isAuthConfirmed          = false;
             $this.showPswdDiffMsg          = false;
             $this.showPswdValidPatternMsg  = false;
         },
@@ -118,24 +120,33 @@ export default {
         validCheck(type) {
             const $this = this;
 
-            if ($this.authParams.userId === '') {
-                $this.alert("아이디를 입력하세요.");
+            //인증번호 요청 버튼, 비밀번호 변경 버튼에 대한 공통 유효성 검사
+            if (ValdUtil.isNull($this.pwsdChngParams.userId)) {
+                $this.alert("아이디(은)는 반드시 입력해야 합니다.");
                 return false;
             }
 
+            //비밀번호 변경 버튼에 대한 공통 유효성 검사
             if (type) {
                 if (!$this.isAuthConfirmed) {
                     $this.alert("인증번호 요청을 하시기 바랍니다.");
                     return false;
                 }
 
-                if ($this.pwsdChngParams.authNum === '') {
-                    $this.alert("인증번호를 입력하세요.");
+                if (ValdUtil.isNull($this.pwsdChngParams.authNo)) {
+                    $this.alert("인증번호(은)는 반드시 입력해야 합니다.");
                     return false;
                 }
 
-                if (!ValdUtil.valdLenNull($this.pwsdChngParams.userPwsd         , 15    , '비밀번호는'            ,true)) return false;
-                if (!ValdUtil.valdLenNull($this.pwsdChngParams.pwsdCheck        , 15    , '비밀번호 확인은'        ,true)) return false;
+                if (ValdUtil.isNull($this.pwsdChngParams.userPwsd)) {
+                    $this.alert("비밀번호(은)는 반드시 입력해야 합니다.");
+                    return false;
+                }
+
+                if (ValdUtil.isNull($this.pwsdChngParams.pwsdCheck)) {
+                    $this.alert("비밀번호 확인(은)는 반드시 입력해야 합니다.");
+                    return false;
+                }
                 
                 if ($this.pwsdChngParams.userPwsd.length < 8 || $this.pwsdChngParams.userPwsd.length > 15) {
                     $this.alert("비밀번호는 8자리이상 15자이하입니다.");
@@ -173,24 +184,17 @@ export default {
             }
 
             //유저 아이디 체크
-            //인증번호 입력할 대 하지만 사용자가 아무 아이디, 인증번호를 넣고 누를수도 있으니 한번 더 체크
+            //인증번호 입력할 때 하지만 사용자가 아무 아이디, 인증번호를 넣고 누를수도 있으니 한번 더 체크
             $this.checkUserId().then(function(isValid) {
                 if (!isValid) {
                     return false;
                 }
 
-                const params = {
-                    ...$this.pwsdChngParams,
-                    userId: $this.authParams.userId
-                };
-
-
-                $this.doPost(`/cmon/sys/auth/updateUserPswd.hb`, params)
+                $this.doPost(`/cmon/sys/auth/updateUserPswd.hb`, $this.pwsdChngParams)
                     .then(function(res) {
                         if (res.data.rtnCd == '9999') {
                             $this.alert(res.data.rtnMsg);
                         } else {
-                            console.log(res);
                             $this.alert("비밀번호가 변경되었습니다.");
                             $this.cancel();
                         }
@@ -205,20 +209,30 @@ export default {
         },
 
         //인증번호 요청
-        requestAuthNum() {
+        requestAuthNo() {
             const $this = this;
 
             $this.checkUserId().then(function(isValid) {
                 if (!isValid) {
                     return;
                 }
-                $this.doPost(`/cmon/sys/auth/sendEmail.hb`, $this.authParams)
-                    .then(function(res) {
-                        if (res.data.rtnCd === '0000') {
-                            const userId = res.data.rtnData.userId;
 
-                            $this.alert(userId + "에 대한 메일계정으로 인증번호가 발송되었습니다. 메일 확인 후 인증번호를 기재해 주시기 바랍니다");
-                            $this.isAuthConfirmed = true;
+                const params = {
+                    userId : $this.pwsdChngParams.userId
+                }
+
+                $this.doPost(`/cmon/sys/auth/sendEmail.hb`, params)
+                    .then(function(res) {
+                        if (res.status === 200) {
+                            const rtnMsg = res.data.rtnMsg;
+
+                            //정상 처리
+                            if (res.data.rtnCd === '0000') {
+                                $this.isAuthConfirmed = true;
+                            }
+
+                            $this.alert(rtnMsg);
+
                         }
                     })
                     .catch(function(error) {
@@ -242,7 +256,11 @@ export default {
 
                 $this.CmonUtil.processLoading(true);
 
-                $this.doPost(`/cmon/sys/auth/selectChckUserId.hb`, $this.authParams)
+                const params = {
+                    userId : $this.pwsdChngParams.userId
+                }
+
+                $this.doPost(`/cmon/sys/auth/selectChckUserId.hb`, params)
                     .then(function(res) {
                         $this.CmonUtil.processLoading(false);
 
@@ -278,11 +296,6 @@ export default {
             // 선택 로직 구현
             this.cancel();
         },
-
-        // 리스트 조회
-        selectList() {
-            // 리스트 조회 로직 구현
-        }
     },
     mounted: function () {
         this.init();
