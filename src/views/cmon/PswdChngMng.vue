@@ -74,7 +74,13 @@
 
 <script>
 
+import Modal from '@/components/dialog/modal.vue';
+import { ValdUtil } from '@/utils/ValdUtil.js'
+
 export default {
+    components: {
+        Modal
+    },
     data: function () {
         return {
             authParams: {
@@ -279,8 +285,7 @@ export default {
         }
     },
     mounted: function () {
-        
+        this.init();
     }
 }
-
 </script>

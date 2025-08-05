@@ -46,13 +46,15 @@ module.exports = defineConfig({
     }
   },
 
+  // index.html 파일이 생성될 위치를 지정
   indexPath: "index.html",
 
+  // Spring Boot의 내장 was의 주소를 작성
   devServer: {
-    port: 9192,
+    port: 3000,
     proxy: {
       '.hb$': {
-        target: 'http://127.0.0.1:9999',
+        target: process.env.VUE_APP_API_URL || 'http://127.0.0.1:8080',
         changeOrigin: true,
         ws: true
       }

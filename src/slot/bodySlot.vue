@@ -96,10 +96,10 @@
 
 import { defineAsyncComponent, shallowRef } from 'vue'
 import { SessionUtil } from '@/utils/SessionUtil.js';
-import Main from  '@/views/rept/stat/TotMon.vue'
+// import Main from  '@/views/rept/stat/TotMon.vue'
 
 import ChatBotServ from '@/views/chtbot/mng/ChatBotServ.vue'
-import TotMon      from '@/views/rept/stat/TotMon.vue'
+// import TotMon      from '@/views/rept/stat/TotMon.vue'
 import { ValdUtil } from '@/utils/ValdUtil';
 
 export default {
@@ -140,13 +140,13 @@ export default {
       // Role에 따른 메인 메뉴 세팅
       setMainMenu(){
          const $this = this;
-         if($this.isAdmin){
-            $this.menuList  = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(TotMon), isClose: false }];
-            $this.clickHist = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(TotMon), isClose: false }];
-         } else {
-            $this.menuList  = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ' , menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
-            $this.clickHist = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ', menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
-         }
+         // if($this.isAdmin){
+         //    $this.menuList  = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(TotMon), isClose: false }];
+         //    $this.clickHist = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(TotMon), isClose: false }];
+         // } else {
+         //    $this.menuList  = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ' , menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
+         //    $this.clickHist = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ', menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
+         // }
       },
 
 
@@ -318,11 +318,11 @@ export default {
             }).then(function (value) {
                if (value.isConfirmed) {
                   $this.menuList.splice(1);
-                  if($this.isAdmin){
-                     $this.clickHist = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(Main), isClose: false }];
-                  } else {
-                     $this.clickHist = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ', menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
-                  }
+                  // if($this.isAdmin){
+                  //    $this.clickHist = [{ menuNm: 'Main', menuUrl: '/rept/stat/TotMon', menuNo: '1', active: true, instance: shallowRef(Main), isClose: false }];
+                  // } else {
+                  //    $this.clickHist = [{ menuNm: 'Main', menuUrl: '/chtbot/mng/ChatBotServ', menuNo: '1', active: true, instance: shallowRef(ChatBotServ), isClose: false }];
+                  // }
                   
                   $this.histPos   = 0;
                   $this.activeTab('1');
