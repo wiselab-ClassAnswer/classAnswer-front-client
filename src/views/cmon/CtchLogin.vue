@@ -23,8 +23,13 @@
                             <input type="password" class="form-control" v-model="params.userPswd" autocomplete="off" v-on:keyup.enter="login()">
                         </div>
                         <div>
+                            <p class="login-lostpw p-0 p-l-25" @click="openPop('join', null)">가입 신청</p>
+                        </div>
+
+                        <div>
                             <p class="login-lostpw p-0 p-l-25" @click="changeDiv">비밀번호 변경</p>
                         </div>
+
                     </div>
                     <div class="form-group mg_none">
                         <div class="text-center">
@@ -166,6 +171,10 @@
 
 import { CmonUtil } from '@/utils/CmonUtil.js'
 import { ValdUtil } from '@/utils/ValdUtil.js';
+//비밀번호 찾기
+import PwsdChngMng from '@/views/cmon/PswdChngMng.vue'
+//회원가입 신청
+import JoinAprvMng from '@/views/oper/cont/JoinAprvMng.vue'
 
 export default {
     data: function () {

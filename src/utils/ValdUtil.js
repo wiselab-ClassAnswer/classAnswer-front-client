@@ -7,15 +7,30 @@ export const ValdUtil = {
      * params : value(이메일 주소)
      * return : 
      */
-    checkEmail(value){
-        if(value == undefined || value == ''){
-            return value;
-        }
-        const regex = '/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i';
-        if(!regex.text(value)){
-            return alert('올바른 이메일 형식이 아닙니다')
-        }
+    checkEmail : function(email) {
+        //var re = /^(([^<>()[]\\.,;:\s@\"]+(\.[^<>()[]\\.,;:\s@\"]+)*)|(\".+\"))@(([[0-9]{1,3}\??.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        //alert(re.test(email));
+
+        //return email.match(re);
+        // if(!re.test(email)) {
+        //     return false
+        // }
+        // return true;
+        return re.test(email);
     },
+    // checkEmail(value){
+    //     if(value == undefined || value == ''){
+    //         return value;
+    //     }
+    //     const regex = '/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i';
+    //     if(!regex.text(value)){
+    //         return alert('올바른 이메일 형식이 아닙니다')
+    //     }
+    // },
+
+    
 
     /**
      * 휴대폰번호 유효성 검사
