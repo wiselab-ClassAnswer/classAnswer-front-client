@@ -3091,3 +3091,354 @@ table.policy tr td {
 }
 
 
+
+/* 테이블 형태 css */
+.content-container {
+    height: 40px;
+    display: inline-block;
+    justify-content: space-between;
+}
+
+.content-container .title {
+    background-color:#EDEEF3;
+    height: inherit;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 0px 8px 0px;
+    margin-right: 0px;
+    border: 0.5px solid #E1E1E1;
+    min-width: 90px;
+}
+
+.content-container .title span {
+    display: inline-block;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 550;
+    width: 100%;
+}
+
+.content-container .content{
+    height: 40px;
+    padding: 5px;
+    vertical-align: middle;
+    display: inline-block;
+    border: 0.5px solid #E1E1E1;
+    min-width: 90px;
+}
+
+.content .content-inner {
+    height: inherit;
+    padding: 5px;
+    width: 100%;
+    position: relative;
+}
+
+.content-inner .under{
+    position: absolute; /* 부모 요소를 기준으로 위치 지정 */
+    bottom: 0; /* 부모의 하단에 위치 */
+    left: 0;
+    width: 100%; /* 부모 너비에 맞추기 */
+    padding: 0px 5px 15px 0px;
+    color: white;
+}
+
+.content-container .content span {
+    display: inline-block;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 450;
+    padding-top: 8px;
+}
+
+.content-container .content input{
+    width: 100%;
+    color: #000000;
+    display: inline-block;
+    height: 30px;
+    border: 1px solid #d1d1dd;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.content-container .content select{
+    width: 100%;
+    color: #000000;
+    display: inline-block;
+    height: 30px;
+    border: 1px solid #d1d1dd;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+
+
+/* 텍스트에리어 컨테이너 */
+.textarea-content-container {
+    height: 200px;
+    position: relative;
+}
+
+.textarea-content-container .title {
+    background-color:#EDEEF3;
+    height: inherit;
+    vertical-align: top;
+    display: inline-block;
+    text-align: left;
+    padding: 8px 0px 8px 0px;
+    margin-right: 0px;
+    border: 0.5px solid #E1E1E1;
+    position: relative; /* 추가 */
+}
+
+.textarea-content-container .title span {
+    position: absolute;
+    top: 50%; /* 부모 높이의 50% 지점으로 이동 */
+    left:50%;
+    transform: translate(-50%, -50%); /* 자신의 높이의 절반만큼 위로 이동해 가운데 정렬 */
+    color: #000000;
+    font-size: 12px;
+    font-weight: 550;
+}
+
+.textarea-content-container .content {
+    height: 200px;
+    padding: 10px; 
+    vertical-align: top;
+    display: inline-block;
+    border: 0.5px solid #E1E1E1;
+    min-width: 90px;
+    
+}
+
+.textarea-content-container span {
+    display: inline-block;
+    color: #000000;
+    /* font-size: 12px;   summernote 에디터 font size가 12px로 고정되는 문제해결을 위해 주석처리함 */
+    font-weight: 450;
+    /* padding-top: 8px; 에디터 버튼이 커짐*/
+}
+
+.textarea-content-container .content textarea {
+    width: 100%; /* 부모 너비에 맞춤 */
+    height: 100%; /* 남은 공간을 채움 */
+    box-sizing: border-box;
+    border: 1px solid #E1E1E1;
+    padding: 8px;
+    resize: none; /* 사용자가 크기 조절 못하게 */
+    font-size: 12px;
+    color: #000000;
+}
+
+
+
+/* 컨텐츠 영역의 라디오 컨테이너  */
+.content .radio-container {
+    width: 100%;
+    height: 30px;
+    /* display: inline-block; */
+ }
+/* 라디오 컨테이너 내 input 정의  */
+/* Type이 라디오 */
+.content .radio-container input[type=radio]{
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    width: 15px;
+    position: relative;
+    height:auto;
+    top:2px;
+}
+/* Type이 체크박스 */
+.content .radio-container input[type=checkbox]{
+    margin-left: 10px;
+    margin-top: 8px;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    width: 15px;
+    position: relative;
+    height:auto;
+    top:2px;
+}
+
+.content .radio-container label:first-child input {
+    margin-left: 0px;
+}
+/* 라디오 컨테이너 내 label 정의  */
+.content .radio-container label {
+    /* padding-left: 3px; */
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+}
+
+
+
+/* 전체 컨텐츠 섹션 */
+.content-section {
+    display: inline-block;
+    width: 100%;
+    margin-top:5px;
+}
+
+.content-section .section-wrap {
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: calc(100vh - 283px);
+    max-height: calc(100vh - 240px);
+}
+
+
+
+/* 스크롤 컨텐츠 영역 */
+.scroll-content-section {
+    overflow-y : auto;
+    border: 1px solid #d1d1dd;
+    width:100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.scroll-content-section .scroll-content-wrap {
+    width: 100%;
+    height: 25px;
+    padding: 5px 5px 3px 5px;
+}
+
+.scroll-content-section .scroll-content-wrap .scroll-content {
+    width: 100%;
+    /* height: inherit; */
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-bottom: 3px;
+    margin-left: 3px;
+}
+
+.scroll-content-section .scroll-content-wrap .scroll-content .content {
+    width: 95%;
+    /* height: inherit; */
+    display: inline-block;
+}
+
+.scroll-content-section .scroll-content-wrap .scroll-content .content span{
+    font-weight: 500;
+    color: #000000;
+    font-size: 12px;
+    padding-left: 3px;
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+.scroll-content-section .scroll-content .content span::before{
+    content: "●";
+    color: #006cd9;
+    padding-right: 5px;
+    font-size: 8px;
+}
+
+.scroll-content-section .scroll-content-wrap .scroll-content .content-btn {
+    width: 5%;
+    height: inherit;
+    text-align: center;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.scroll-content-section .scroll-content-wrap .scroll-content .content-btn .btn-delt {
+    width: 20px;
+    height: 20px;
+    padding:0;
+}
+
+
+
+.vw-1 {
+    width: 7.06vw !important;
+}
+
+.vw-1_5 {
+    width: calc(7.06vw * 1.5) !important;
+}
+
+.vw-2 {
+    width: calc(7.06vw * 2) !important;
+}
+
+.vw-2_5 {
+    width: calc(7.06vw * 2.5) !important;
+}
+
+.vw-3 {
+    width: calc(7.06vw * 3) !important;
+}
+
+.vw-4 {
+    width: calc(7.06vw * 4) !important;
+}
+
+.vw-5 {
+    width: calc(7.06vw * 5) !important;
+}
+
+.vw-6 {
+    width: calc(7.06vw * 6) !important;
+}
+
+.vw-7 {
+    width: calc(7.06vw * 7) !important;
+}
+
+.vw-8 {
+    width: calc(7.06vw * 8) !important;
+}
+
+.vw-9 {
+    width: calc(7.06vw * 9) !important;
+}
+
+.vw-10 {
+    width: calc(7.06vw * 10) !important;
+}
+
+.vw-11 {
+    width: calc(7.06vw * 11) !important;
+}
+
+.vw-12 {
+    width: calc(7.06vw * 12) !important;
+}
+
+.area-container {
+    vertical-align: top;
+    overflow: scroll;
+}
+
+.area-container-content {
+    word-wrap: break-word;
+    height:100%;
+    width:100%
+}
+
+/* 검색조건 없는 섹션 */
+.non-search-section{
+    display: inline-block;
+    width: 100%;
+    /* margin-top:5px; */
+}
+
+.non-search-section .section-wrap {
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: calc(100vh - 160px);
+}
