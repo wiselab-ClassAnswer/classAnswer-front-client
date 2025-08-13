@@ -76,17 +76,16 @@ export default {
     },
     methods: {
         init: function() {
-            this.isLogin();
+            // this.isLogin();
         },
 
         isLogin: function(){
-            
-            if( ValdUtil.isNotNull(SessionUtil.getUserId())){
+            // if( ValdUtil.isNotNull(SessionUtil.getUserId())){
                 
-            }
-            else{
-                router.push({name:'Login'});
-            }
+            // }
+            // else{
+            //     router.push({name:'Login'});
+            // }
         },
         setTimer() {
             let $this = this;

@@ -15,9 +15,9 @@ instance.interceptors.request.use(
         if ( !!!config.headers["Content-Type"] ) {
             config.headers["Content-Type"] = "application/json; charset=utf-8";
         }
-        
         // 로그인시 토큰 조회, 비밀번호 찾기에서 사용자ID 체크
-        if ( config.url !== "/cmon/sys/login/selectTokn.hb" && config.url !== "/cmon/sys/login/selectChckUserId.hb" && config.url !== "/cmon/sys/login/deleteTokn.hb" && "/cmon/sys/login/updateUserPwsd.hb" )
+        if ( config.url !== "/cmon/sys/login/selectTokn.hb" && config.url !== "/cmon/sys/login/selectChckUserId.hb" && config.url !== "/cmon/sys/login/deleteTokn.hb" && "/cmon/sys/login/updateUserPwsd.hb" &&
+            config.url !== "/cmon/sys/sideBarMenuMng/selectListSideBarMenuMng.hb" && config.url !== "/cmon/sys/sideBarMenuMng/selectListUserFavo.hb")
         {   
             if ( !SessionUtil.getToken() ) {
                 // 토큰 없을 시 Login 화면으로 이동
@@ -74,6 +74,7 @@ instance.interceptors.response.use(
         {
             // 토큰 없을 시 Login 화면으로 이동
             CmonUtil.clearSession();
+            console.log("토근 없으니 로그인 화면으로 ")
             router.push({name: 'Login'});
             // CmonUtil.alert('세션이 종료되었습니다.<br>다시 로그인 해주세요.');
         }

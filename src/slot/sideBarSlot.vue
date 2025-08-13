@@ -76,10 +76,11 @@ export default {
             let $this = this;
 
             let sendParam = {
-                userId : $this.params.userId
+                userId : $this.params.userId,
+                siteType : 'CTCH',
             }
             $this.menuData = [];
-            if (ValdUtil.isNotNull($this.params.userId)) {
+            // if (ValdUtil.isNotNull($this.params.userId)) {
                 $this.doPost('/cmon/sys/sideBarMenuMng/selectListSideBarMenuMng.hb', sendParam).then(function (response) {
                     $this.menuData = response.data.rtnData.result;
                     $this.menuData.unshift({menuNo: 'F0000', upprMenuNo: '00000', menuUrl: '', menuNm: '즐겨찾기', menuDesc: '즐겨찾기 분류',iconInfo:'fa fa-regular fa-star',useYn:'Y',menuLevl:1 ,sortSeq:0})
@@ -104,7 +105,7 @@ export default {
                     });
 
                 });
-            }
+            // }
         },
 
         getUserRoleList: function(){
