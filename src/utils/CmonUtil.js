@@ -567,7 +567,11 @@ export const CmonUtil = {
         }
         
 
-        AxiosUtil.post('/cmon/sys/login/selectTokn.hb', params).then(function (response) {
+        AxiosUtil.post('/cmon/sys/login/selectTokn.hb', params, {
+            headers: {
+                'X-User-Type': 'CTCH'
+            }
+        }).then(function (response) {
             if (response.data.rtnCd == '0000') {
                 let data = response.data.rtnData;
                 SessionUtil.setUserInfo(data.userInfo);
