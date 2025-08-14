@@ -31,14 +31,27 @@
 
                 <div class="topnav-user">
                     <ul>
-                        <li class="m-r-10">{{currDt}}</li>
-                        <li class="user_name">{{ userInfo.userNm }} ({{ userInfo.userId }})&nbsp;&nbsp;</li>
-                        <li>
-                            <a class="logout_btn" href="#" @click="logout">
-                                <!-- <i class="fa fa-sign-out"></i> 로그아웃 -->
-                                |&nbsp;&nbsp;로그아웃
-                            </a>
-                        </li>
+                        <span v-if="userInfo.userId === ''">
+                            <li>
+                                <button class="btn-normal wd-100" @click="open">로그인</button>
+                            </li>
+
+                            <li>
+                                <button class="btn-normal wd-100" @click="open">회원가입</button>
+                            </li>
+                        </span>
+
+                        <span v-else>
+                            <li class="m-r-10">{{currDt}}</li>
+                            <li class="user_name">{{ userInfo.userNm }} ({{ userInfo.userId }})&nbsp;&nbsp;</li>
+                            <li>
+                                <a class="logout_btn" href="#" @click="logout">
+                                    <!-- <i class="fa fa-sign-out"></i> 로그아웃 -->
+                                    |&nbsp;&nbsp;로그아웃
+                                </a>
+                            </li>
+                        </span>
+                        
                     </ul>
                 </div>
 
@@ -152,7 +165,12 @@ export default {
             if(ValdUtil.isNotNull(select)){
                 $this.emitter.emit('onNewTab', select);
             }
-        }
+        },
+
+        open() {
+
+    }   ,     
+        
     },
     mounted() {
         this.init();

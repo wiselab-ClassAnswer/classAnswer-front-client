@@ -1,5 +1,5 @@
 <template>
-   <slot name="body">
+   <!-- <slot name="body">
       <div class="bg-bodytab animated row" v-cloak>
          <div class="tab-scroller tab-scroller-left float-left">
             <a href="#" @click="moveScroll('left')">
@@ -57,13 +57,12 @@
                   <template v-if="!menu.isClose">   
                      <li :class="{ 'active': currMenuNo === menu.menuNo && !menu.isClose}" :id="'tab-menu-' + menu.menuNo">
                         <a href="javascript:void(0)" @click="activeTab(menu.menuNo)">
-                           <!-- 즐겨찾기 등록 -->
+                           
                            <button class="fav" type="button" title="즐겨찾기 메뉴에서 삭제합니다." @click="deltFavo(menu.menuNo)"
                               v-if="isFavor(menu.menuNo) && menu.menuNo !== '1'">
                               <img src="@/assets/img/topnav_fav.png" alt="즐겨찾기">
                            </button>
 
-                           <!-- 즐겨찾기 해제 -->
                            <button class="fav-non" type="button" title="즐겨찾기 메뉴에 추가합니다." @click="saveFavo(menu.menuNo)"
                               v-if="!isFavor(menu.menuNo) && menu.menuNo !== '1'">
                               <img src="@/assets/img/sidebar_menu_icon0.png" alt="즐겨찾기 해제">
@@ -89,6 +88,15 @@
             </div>
          </div>
       </div>
+   </slot>  -->
+
+   <slot name="body">
+      <div id="tab-content" class="tab-content">
+            <div v-for="(menu, index) in menuList" class="tab-pane" :id="'tab' + menu.menuNo" :key="index"
+               :class="{ 'active': currMenuNo === menu.menuNo && !menu.isClose, 'tab-pane': !menu.isClose}">
+               <component v-if="!menu.isClose" :is="menu.instance" />
+            </div>
+         </div>
    </slot>
 </template>
 
@@ -192,9 +200,9 @@ export default {
             return false;
          } else {
             return true;
-         }
+         }C1200-1755145653305
       },
-      newTab: function (menu) {
+      newTab: function (menu, isInit) {
          let timestamp = Date.now();
          if (this.checkTab(menu.menuNo)) {
             this.currMenuNo = menu.menuNo + '-' + timestamp;
@@ -204,14 +212,14 @@ export default {
                menuNo: this.currMenuNo,
                active: true,
                instance: shallowRef(defineAsyncComponent(() => import('@/views' + menu.menuUrl + '.vue'))),
-               isClose: false
+               isClose: false,
             });
             // this.addActTbp(this.currMenuNo);
+
             this.$nextTick(() => {
                // this.onFocusTab(this.currMenuNo);
-               this.activeTab(this.currMenuNo);
+               this.activeTab(this.currMenuNo, isInit);
             });
-
          }
       },
       onFocusTab: function (menuNo) {
@@ -234,7 +242,9 @@ export default {
             this.addActTbp(menuNo);
          }
          this.currMenuNo = menuNo;
-         this.emitter.emit('onSelectMenu', menuNo);
+         if (div !== 'init') {
+            this.emitter.emit('onSelectMenu', menuNo);
+         }
          this.onFocusTab(menuNo);
       },
       moveScroll: function (direction, offset = 150) {
@@ -450,13 +460,20 @@ export default {
             const sub = { ...menu, child: [], active: false, idPath: [menu.menuNo] };
             $this.filteredMenuList.push(sub);
             const parentMenu = $this.filteredMenuList.find(m => m.menuNo === sub.upprMenuNo);
-
          });
          // this.menuList = $this.filteredMenuList;
-
+         let menuList = getMenuList;
+         $this.$nextTick(() => {
+            $this.setDefaultPage(menuList);
+         });
       },
 
-
+      //화면 진입 시 디폴트 페이지 세팅 (클래스맵 소개)
+      setDefaultPage(menuList) {
+         const $this = this;
+         const defaultPage = menuList.find(menu => menu.menuNo === 'C1200');
+         $this.newTab(defaultPage, 'init');
+      },
 
 
    },
