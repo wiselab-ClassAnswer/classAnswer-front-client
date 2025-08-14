@@ -1,8 +1,9 @@
 /* 로그인 CSS */
 .login-content {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to right, #acb4db, #61d598);
+    /* width: 100vw; */
+    height: 86vh;
+    /* background: linear-gradient(to right, #acb4db, #61d598); */
+    background: linear-gradient(to right, #ffffff, rgb(123, 123, 123));
     display: flex;
     justify-content: center;
     align-items: center;

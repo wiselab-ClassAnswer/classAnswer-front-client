@@ -141,7 +141,7 @@
             비밀번호 찾기 화면 -->
         </div>
 
-        <div class="wave">
+        <!-- <div class="wave">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
@@ -163,7 +163,7 @@
                     <use xlink:href="#gentle-wave" x="48" y="7" />
                 </g>
             </svg>
-        </div>
+        </div> -->
 
         <!-- 거래처 조회 팝업 -->
         <PwsdChngMng ref="PwsdChngMngRefModal"></PwsdChngMng>
@@ -358,16 +358,16 @@ export default {
     cursor: default !important;
 }
 
-.login-content {
+/* .login-content {
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     background: linear-gradient(to right, #ffffff, rgb(123, 123, 123));
-    /* background: rgb(123, 123, 123); */
+    background: rgb(123, 123, 123);
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 700px;
-}
+} */
 
 .zindex {
     z-index: 999;

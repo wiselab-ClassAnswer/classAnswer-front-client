@@ -463,6 +463,10 @@ export default {
          });
          // this.menuList = $this.filteredMenuList;
          let menuList = getMenuList;
+
+         //교사가 접근할 수 있는 메뉴 세션에 저장 (탭 페이지 전환하기 위해서)
+         SessionUtil.setCtchMenuList(menuList);
+         
          $this.$nextTick(() => {
             $this.setDefaultPage(menuList);
          });

@@ -33,11 +33,11 @@
                     <ul>
                         <span v-if="userInfo.userId === ''">
                             <li>
-                                <button class="btn-normal wd-100" @click="open">로그인</button>
+                                <button class="btn-normal wd-100" @click="open('lgin')">로그인</button>
                             </li>
 
                             <li>
-                                <button class="btn-normal wd-100" @click="open">회원가입</button>
+                                <button class="btn-normal wd-100" @click="open('sign')">회원가입</button>
                             </li>
                         </span>
 
@@ -167,9 +167,14 @@ export default {
             }
         },
 
-        open() {
+        open(type) {
+            const $this = this;
+            if (type === 'lgin') {
+                $this.changePage('C1100');
+            } else if (type === 'sign') {
 
-    }   ,     
+            }
+        },     
         
     },
     mounted() {

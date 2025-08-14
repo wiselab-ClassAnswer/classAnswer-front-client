@@ -18,7 +18,7 @@
                     </li>
 
                     <li v-for="(menu) in menuTree" :key="menu.menuNo" :id="menu.menuNo" :menuTree="'0_0_' + menu.menuNo" :class="{'active': menu.active}">
-                        <a class="sidemenu" href="#" @click="handlerMenu(menu)" >
+                        <a v-if="menu.useYn !=='N'" class="sidemenu" href="#" @click="handlerMenu(menu)" >
                             <i :class="(!menu.iconInfo ? 'fa fa-dot-circle-o' : menu.iconInfo)"></i>
                             <span class="nav-label">{{menu.menuNm}}</span><span class="fa arrow"></span>
                         </a>
@@ -50,6 +50,7 @@
 <script>
 import { SessionUtil } from '@/utils/SessionUtil.js';
 import { ValdUtil } from '@/utils/ValdUtil';
+import router from '@/router';
   
 export default {
     data: function() {
@@ -185,6 +186,11 @@ export default {
         // 탭 추가 또는 하위메뉴 열기
         handlerMenu: function(menu) {
             if ( !!menu.menuUrl ) {
+
+                if (!this.userMenuAccess(menu)) {
+                    return false
+                }
+
                 this.currentMenu = menu;
                 menu.active = true;
                 this.selectMenu(menu.menuNo);
@@ -246,11 +252,31 @@ export default {
             let upprMenu = $this.menuTree.find(item => item.menuNo === 'F0000');
 
             for(let i = 0 ; i < upprMenu.child.length; i++){
-                if(upprMenu.child[i].menuNo === menu.menuNo){
+            if(upprMenu.child[i].menuNo === menu.menuNo){
                     upprMenu.child.splice(i,1);
                     i--;
                 }
             }
+        },
+
+        //메뉴 이동 시 접근 체크
+        userMenuAccess(menu) {
+            const $this = this;
+
+            const sessionUserInfo = SessionUtil.getUserInfo();
+            console.log(menu);
+            if (menu.menuNo === 'O2100' || menu.menuNo === 'C1300') {
+                if (sessionUserInfo == null || sessionUserInfo == '') {
+                    $this.alert("로그인 후 이용하실 수 있습니다..").then((result) =>{
+                        if ( result.isConfirmed) {
+                        }
+                    });
+                    return false;
+                }
+            } else if (menu.menuNo) {
+
+            }
+            return true;
         }
     },
     watch: {

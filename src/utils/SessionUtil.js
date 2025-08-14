@@ -231,5 +231,7 @@ export const SessionUtil = {
     clearCmonCdList: function(){
         this.removeLocalStorageData('CMON_CD_LIST');
     },
-
+    setCtchMenuList: function(menuList) {
+        this.setLocalStorageData('MENU_LIST', menuList);
+    }
 }

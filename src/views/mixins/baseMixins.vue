@@ -634,7 +634,15 @@ const baseMixins = {
             var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
             re = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
         return re.test(number);
-    },
+        },
+        changePage(menuNo) {
+            if (menuNo) {
+                const menuList = SessionUtil.getLocalStorageData('MENU_LIST', false);
+                const targetMenu = menuList.find(menu => menu.menuNo === menuNo);
+                
+                this.emitter.emit('onNewTab', targetMenu);
+            }
+        }
     },
     computed: {
         // isOpen() {
