@@ -1,5 +1,5 @@
 <template>
-
+    활용법 화면
 
 </template>
 

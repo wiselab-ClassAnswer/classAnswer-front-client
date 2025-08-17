@@ -183,6 +183,13 @@ export default {
             }
         },
   
+        clearMenuSelection: function() {
+            this.menuList.forEach(menu => {
+                menu.active = false; 
+            });
+            this.currentMenu = null;
+        },
+
         // 탭 추가 또는 하위메뉴 열기
         handlerMenu: function(menu) {
             if ( !!menu.menuUrl ) {
@@ -194,7 +201,7 @@ export default {
                 this.currentMenu = menu;
                 menu.active = true;
                 this.selectMenu(menu.menuNo);
-                this.emitter.emit('onNewTab', menu);
+                this.emitter.emit('onNewTab', { menu: menu, div: true });
             } else {
                 if ( menu.active ) {
                     menu.active = false;

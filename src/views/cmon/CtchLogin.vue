@@ -27,9 +27,12 @@
                         </div>
 
                         <div>
-                            <p class="login-lostpw p-0 p-l-25" @click="openPop('pwsd', null)">비밀번호 변경</p>
+                            <p class="login-lostpw p-0 p-l-25" @click="openPop('id', null)">아이디 찾기</p>
                         </div>
 
+                        <div>
+                            <p class="login-lostpw p-0 p-l-25" @click="openPop('pwsd', null)">비밀번호 변경</p>
+                        </div>
 
                     </div>
                     <div class="form-group mg_none">
@@ -165,10 +168,13 @@
             </svg>
         </div> -->
 
-        <!-- 거래처 조회 팝업 -->
+        <!-- 비밀번호 변경 팝업 -->
         <PwsdChngMng ref="PwsdChngMngRefModal"></PwsdChngMng>
-        <!-- 견적서 조회 팝업 -->
+        <!-- 회원가입 팝업 -->
         <JoinAprvMng ref="JoinAprvMngRefModal"></JoinAprvMng>
+        <!-- 아이디 찾기 팝업 -->
+        <FindUserId ref="FindUserIdRefModal"></FindUserId>
+
 
     </div>
 </template>
@@ -181,11 +187,14 @@ import { ValdUtil } from '@/utils/ValdUtil.js';
 import PwsdChngMng from '@/views/cmon/PswdChngMng.vue'
 //회원가입 신청
 import JoinAprvMng from '@/views/cmon/cont/JoinAprvMng.vue'
+//아이디 찾기
+import FindUserId from '@/views/cmon/FindUserId.vue';
 
 export default {
     components: {
         PwsdChngMng,
         JoinAprvMng,
+        FindUserId,
     },
     data: function () {
         return {
@@ -251,15 +260,21 @@ export default {
         // 팝업
         openPop(div, inptId){
             const $this = this;
-            //비밀번호 변경 팝업
             if( div === "pwsd"){
                 $this.$refs.PwsdChngMngRefModal.show();
                 $this.$refs.PwsdChngMngRefModal.init(div);
             }
-            // 가입 신청 팝업
+            else if (div === 'id') {
+                $this.$refs.FindUserIdRefModal.show();
+                $this.$refs.FindUserIdRefModal.init(div);
+            }
             else if(div === "join"){
                 $this.$refs.JoinAprvMngRefModal.show();
                 $this.$refs.JoinAprvMngRefModal.init(div);
+            }
+            else if(div === "term"){
+                $this.$refs.TermAgreRefModal.show();
+                $this.$refs.TermAgreRefModal.init(div);
             }
         },
 

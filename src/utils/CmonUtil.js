@@ -552,59 +552,79 @@ export const CmonUtil = {
     alert: function(params) {
         window.vueInstance.alert(params);
     },
+    confirm: function(params) {
+        window.vueInstance.confirm(params);
+    },
+    changePage: function(params, isSelect) {
+        window.vueInstance.changePage(params, isSelect);
+    },
     login(params) {
-        let $this = this;
+        const $this = this;
 
         if (ValdUtil.isNull(params.userId)) {
-            $this.alert('아이디를 입력해주시기 바랍니다.');
-            return false;
+          this.alert('아이디를 입력해주시기 바랍니다.');
+          return false;
         }
-
-        
+      
         if (ValdUtil.isNull(params.userPswd)) {
-            $this.alert('비밀번호를 입력해주시기 바랍니다.');
-            return false;
+          this.alert('비밀번호를 입력해주시기 바랍니다.');
+          return false;
         }
-        
-
+      
         AxiosUtil.post('/cmon/sys/login/selectTokn.hb', params, {
-            headers: {
-                'X-User-Type': 'CTCH'
-            }
-        }).then(function (response) {
-            if (response.data.rtnCd == '0000') {
-                let data = response.data.rtnData;
-                SessionUtil.setUserInfo(data.userInfo);
-                SessionUtil.setToken(data.jwtToken);
-                SessionUtil.setUserRoleList(data.roleList);
-                SessionUtil.setCmonCdList(data.cmonCdList);
-
-                // store.commit(types.ROLE_CD, response.data.rtnData.userInfo.roleCd);
-                // store.commit(types.USER_ID, response.data.rtnData.userInfo.userId);
-                //store.commit(types.USER_NM, response.data.rtnData.userInfo.empNm);
-                router.push({ name: 'Home' });
-            } else {
-                $this.alert(response.data.rtnMsg);
-            }
-        }, function (error) {
-            if (!!error.response.data.rtnMsg) {
-                $this.alert(error.response.data.rtnMsg);
-            }
-
+          headers: { 'X-User-Type': 'CTCH' }
+        }).then((response) => {
+          if (response.data.rtnCd === '0000') {
+            const data = response.data.rtnData;
+      
+            SessionUtil.setUserInfo(data.userInfo);
+            SessionUtil.setToken(data.jwtToken);
+            SessionUtil.setUserRoleList(data.roleList);
+            SessionUtil.setCmonCdList(data.cmonCdList);
+      
+            store.commit('account/ROLE_CD', data.userInfo.roleCd);
+            store.commit('account/USER_ID', data.userInfo.userId);
+            store.commit('account/USER_NM', data.userInfo.userNm);
+            store.commit('account/TOKN', data.jwtToken);
+            
+            $this.changePage('C1200', false);
+          } else {
+            this.alert(response.data.rtnMsg);
+          }
+        }, (error) => {
+          if (error.response?.data?.rtnMsg) {
+            this.alert(error.response.data.rtnMsg);
+          }
         });
     },
 
     logout: function () {
         let $this = this;
-        AxiosUtil.post('/cmon/sys/login/deleteTokn.hb', {userId: SessionUtil.getUserId()});
-        $this.clearSession();
-        router.push({ name: 'Login' });
+
+        $this.confirm({
+            content: '로그아웃 하시겠습니까?',
+            callback: {
+                yes() {
+                    AxiosUtil.post('/cmon/sys/login/deleteTokn.hb', {userId: SessionUtil.getUserId()});
+                    //세션 삭제
+                    $this.clearSession();
+            
+                    $this.clearUserInfoState();
+
+                    $this.changePage('C1100', false);
+                }
+            }
+        })
+    },
+
+    clearUserInfoState() {
+        store.commit('account/ROLE_CD', null);
+        store.commit('account/USER_ID', null);
+        store.commit('account/USER_NM', null);
+        store.commit('account/TOKN', null);
     },
 
     clearSession: function() {
-        store.commit(types.USER_ID, '');
-        store.commit(types.USER_NM, '');
-        store.commit(types.ROLE_CD, '');
         SessionUtil.clearToken();
         SessionUtil.clearUserInfo();
         SessionUtil.clearUserRoleList();
@@ -1173,7 +1193,7 @@ export const CmonUtil = {
                             SessionUtil.setLocalStorageData(key, getParam, false);
                         }
             
-                        window.emitter.emit('onNewTab',menu);
+                        window.emitter.emit('onNewTab',{ menu: menu, div: false });
                         isMenuRole = false;
             
                     } else {
@@ -1386,4 +1406,5 @@ export const CmonUtil = {
             ref.select();
         }
     },
+
 }

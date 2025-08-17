@@ -56,16 +56,11 @@
                              </p>   
                          </div>
 
-                        <!-- 확인 버튼 (비밀번호 변경) -->
-                        <div class="section-info-part">
-                            <div class="privacy_wrap_btn">
-                                <button class="btn-normal wd-100 h-30" @click="chngNewPswd">확인</button>
-                            </div>
-                        </div>
 
-                        <!-- 닫기 버튼-->
-                        <div class="button-box1 m-t-20">
-                            <button class="btn-normal"  @click="cancel">닫기</button>
+                        <div class="button-box1 m-t-20 g-10">
+                            <button class="btn-normal wd-100 h-30" @click="chngNewPswd">확인</button>
+
+                            <button class="btn-normal wd-100 h-30"  @click="cancel">닫기</button>
                         </div>
                     </div>
                 </div>
@@ -220,7 +215,7 @@ export default {
                 const params = {
                     userId : $this.pwsdChngParams.userId
                 }
-
+                
                 $this.doPost(`/cmon/sys/auth/sendEmail.hb`, params)
                     .then(function(res) {
                         if (res.status === 200) {

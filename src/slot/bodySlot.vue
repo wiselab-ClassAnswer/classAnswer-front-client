@@ -88,15 +88,15 @@
             </div>
          </div>
       </div>
-   </slot>  -->
+   </slot> -->
 
    <slot name="body">
       <div id="tab-content" class="tab-content">
-            <div v-for="(menu, index) in menuList" class="tab-pane" :id="'tab' + menu.menuNo" :key="index"
-               :class="{ 'active': currMenuNo === menu.menuNo && !menu.isClose, 'tab-pane': !menu.isClose}">
-               <component v-if="!menu.isClose" :is="menu.instance" />
-            </div>
+         <div v-for="(menu, index) in menuList" class="tab-pane" :id="'tab' + menu.menuNo" :key="index"
+            :class="{ 'active': currMenuNo === menu.menuNo && !menu.isClose, 'tab-pane': !menu.isClose}">
+            <component v-if="!menu.isClose" :is="menu.instance" />
          </div>
+      </div>
    </slot>
 </template>
 
@@ -202,7 +202,7 @@ export default {
             return true;
          }C1200-1755145653305
       },
-      newTab: function (menu, isInit) {
+      newTab: function (menu, div) {
          let timestamp = Date.now();
          if (this.checkTab(menu.menuNo)) {
             this.currMenuNo = menu.menuNo + '-' + timestamp;
@@ -218,7 +218,7 @@ export default {
 
             this.$nextTick(() => {
                // this.onFocusTab(this.currMenuNo);
-               this.activeTab(this.currMenuNo, isInit);
+               this.activeTab(this.currMenuNo, div);
             });
          }
       },
@@ -242,7 +242,8 @@ export default {
             this.addActTbp(menuNo);
          }
          this.currMenuNo = menuNo;
-         if (div !== 'init') {
+         //div가 true이면 메뉴가 선택됨 
+         if (div) {
             this.emitter.emit('onSelectMenu', menuNo);
          }
          this.onFocusTab(menuNo);
@@ -467,6 +468,7 @@ export default {
          //교사가 접근할 수 있는 메뉴 세션에 저장 (탭 페이지 전환하기 위해서)
          SessionUtil.setCtchMenuList(menuList);
          
+         //화면 진입 시 초기 화면 세팅
          $this.$nextTick(() => {
             $this.setDefaultPage(menuList);
          });
@@ -476,7 +478,7 @@ export default {
       setDefaultPage(menuList) {
          const $this = this;
          const defaultPage = menuList.find(menu => menu.menuNo === 'C1200');
-         $this.newTab(defaultPage, 'init');
+         $this.newTab(defaultPage, false);
       },
 
 
@@ -513,7 +515,9 @@ export default {
       this.params.userId = SessionUtil.getUserId();
       this.emitter.on('onSetMenu', (getMenuList) => { this.setMenuList(getMenuList) });
 
-      this.emitter.on('onNewTab', (menu) => { this.newTab(menu) });
+      this.emitter.on('onNewTab', ({ menu, div }) => {
+         this.newTab(menu, div);
+      });
 
       this.chckMenuNo();
    },

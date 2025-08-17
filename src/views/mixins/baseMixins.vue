@@ -635,12 +635,12 @@ const baseMixins = {
             re = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
         return re.test(number);
         },
-        changePage(menuNo) {
+        changePage(menuNo, isSelect) {
             if (menuNo) {
                 const menuList = SessionUtil.getLocalStorageData('MENU_LIST', false);
                 const targetMenu = menuList.find(menu => menu.menuNo === menuNo);
                 
-                this.emitter.emit('onNewTab', targetMenu);
+                this.emitter.emit('onNewTab', { menu: targetMenu, div: isSelect });
             }
         }
     },

@@ -1,5 +1,5 @@
 <template>
-
+    주요기능화면 
 
 </template>
 
