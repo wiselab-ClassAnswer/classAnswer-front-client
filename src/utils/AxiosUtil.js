@@ -18,7 +18,7 @@ instance.interceptors.request.use(
         // 로그인시 토큰 조회, 비밀번호 찾기에서 사용자ID 체크
         if ( config.url !== "/cmon/sys/login/selectTokn.hb" && config.url !== "/cmon/sys/auth/selectChckUserId.hb" && config.url !== "/cmon/sys/login/deleteTokn.hb" && config.url !== "/cmon/sys/auth/updateUserPswd.hb" &&
             config.url !== "/cmon/sys/sideBarMenuMng/selectListSideBarMenuMng.hb" && config.url !== "/cmon/sys/sideBarMenuMng/selectListUserFavo.hb" && config.url !== "/cmon/sys/auth/findUserId.hb" &&
-            config.url !== "/cmon/sys/auth/sendEmail.hb" &&  config.url !== "/cmon/cont/term/select.hb")
+            config.url !== "/cmon/sys/auth/sendEmail.hb" &&  config.url !== "/oper/cont/term/select.hb")
         {   
             if ( !SessionUtil.getToken() ) {
                 // 토큰 없을 시 Login 화면으로 이동

@@ -62,7 +62,7 @@ export default {
 
         selectTerm() {
             const $this = this;
-            $this.doPost(`/cmon/cont/term/select.hb`, $this.params)
+            $this.doPost(`/oper/cont/term/select.hb`, $this.params)
                 .then(function (res) {
                      $this.termInfo.termCntn = res.data.rtnData.result.termCntn;
                     if (res.status === 200) {
